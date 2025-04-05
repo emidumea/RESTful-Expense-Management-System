@@ -1,0 +1,147 @@
+form {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: left;
+}
+
+input, select, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 8px;
+}
+
+button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #218838;
+}
+
+p.success {
+    color: green;
+}
+
+p.error {
+    color: red;
+}
+
+
+/* General reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    text-align: center;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    color: #333;
+    font-size: 2.5em;
+}
+
+.logout-btn {
+    text-decoration: none;
+    background-color: #e6992d;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: inline-block;
+    font-size: 1.2em;
+}
+
+.logout-btn:hover {
+    background-color: #d7881a;
+}
+
+/* Expense Section */
+.expenses {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.add-expense-btn {
+    background-color: #9C9FA2;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.add-expense-btn:hover {
+    background-color: #7f8487;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #e6992d;
+    color: #fff;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+tr:nth-child(even) td {
+    background-color: #e9ecef;
+}
+
+td a.delete-btn {
+    color: #f44336;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+td a.delete-btn:hover {
+    text-decoration: underline;
+}
+

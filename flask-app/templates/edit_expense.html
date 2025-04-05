@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Expense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Edit Expense</h1>
+        <a class="back-btn" href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </header>
+
+    <form action="{{ url_for('update_expense', id=expense.id) }}" method="POST">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" name="amount" value="{{ expense.amount }}" required>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="INTRETINERE" {% if expense.category == "INTRETINERE" %}selected{% endif %}>Întreținere</option>
+            <option value="MANCARE" {% if expense.category == "MANCARE" %}selected{% endif %}>Mâncare</option>
+            <option value="DISTRACTIE" {% if expense.category == "DISTRACTIE" %}selected{% endif %}>Distracție</option>
+            <option value="SCOALA" {% if expense.category == "SCOALA" %}selected{% endif %}>Școală</option>
+            <option value="PERSONALE" {% if expense.category == "PERSONALE" %}selected{% endif %}>Personale</option>
+        </select>
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" value="{{ expense.description }}" required>
+
+        <button type="submit">Save Changes</button>
+    </form>
+</div>
+</body>
+</html>

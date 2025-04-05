@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Welcome, {{ username }}!</h1>
+        <a class="logout-btn" href="{{ url_for('logout') }}">Logout</a>
+    </header>
+
+    <section class="expenses">
+        <h2>Your Expenses</h2>
+        <a class="add-expense-btn" href="{{ url_for('add_expense') }}">Add Expense</a>
+        <table>
+            <thead>
+            <tr>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for expense in expenses %}
+            <tr>
+                <td>{{ expense.category }}</td>
+                <td>${{ expense.amount }}</td>
+                <td>{{ expense.description }}</td>
+                <td>{{ expense.date }}</td>
+                <td>
+                    <a class="delete-btn" href="{{ url_for('delete_expense', id=expense.id) }}">Delete</a>
+                    <a class="edit-btn" href="#" onclick="openUpdateForm('{{ expense.id }}', '{{ expense.amount }}', '{{ expense.category }}', '{{ expense.description }}')">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+
+<div id="updateFormContainer" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeUpdateForm()">&times;</span>
+        <h2>Update Expense</h2>
+        <form id="updateExpenseForm">
+            <input type="hidden" id="updateExpenseId" name="id">
+
+            <label for="updateAmount">Amount:</label>
+            <input type="number" id="updateAmount" name="amount" required>
+
+            <label for="updateCategory">Category:</label>
+            <select id="updateCategory" name="category">
+                <option value="INTRETINERE">Întreținere</option>
+                <option value="MANCARE">Mâncare</option>
+                <option value="DISTRACTIE">Distracție</option>
+                <option value="SCOALA">Școală</option>
+                <option value="PERSONALE">Personale</option>
+            </select>
+
+            <label for="updateDescription">Description:</label>
+            <input type="text" id="updateDescription" name="description" required>
+
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    function openUpdateForm(id, amount, category, description)
+    {
+        document.getElementById("updateExpenseId").value = id;
+        document.getElementById("updateAmount").value = amount;
+        document.getElementById("updateCategory").value = category;
+        document.getElementById("updateDescription").value = description;
+        document.getElementById("updateFormContainer").style.display = "block";
+    }
+
+    function closeUpdateForm()
+    {
+        document.getElementById("updateFormContainer").style.display = "none";
+    }
+
+   document.getElementById("updateExpenseForm").onsubmit = function(event)
+   {
+    event.preventDefault();
+
+    let expenseId = document.getElementById("updateExpenseId").value;
+    let amount = document.getElementById("updateAmount").value;
+    let category = document.getElementById("updateCategory").value;
+    let description = document.getElementById("updateDescription").value;
+
+    fetch(`/update_expense/${expenseId}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+            "amount": amount,
+            "category": category,
+            "description": description
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert("Expense updated successfully!");
+            location.reload();
+        } else {
+            alert("Failed to update expense: " + data.message);
+        }
+    })
+    .catch(error => console.error("Error:", error));
+};
+
+</script>
+
+</body>
+</html>

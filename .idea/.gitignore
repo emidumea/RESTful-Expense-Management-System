@@ -1,0 +1,34 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Java/Kotlin
+*.class
+*.jar
+*.war
+*.ear
+/target/
+/build/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Python / Flask
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+instance/
+*.db
+
+# Logs
+*.log
+
+# OS-specific
+.DS_Store
+Thumbs.db
